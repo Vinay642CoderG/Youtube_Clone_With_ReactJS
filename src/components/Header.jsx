@@ -4,6 +4,7 @@ import { headerIcons } from './utils/Icons'
 import { UseAppContext } from '../context/AppContext'
 import { fetchFromAPI } from '../utils/FetchFromAPI'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const {
   AiOutlineMenu,
@@ -23,9 +24,10 @@ const Header = () => {
     setSelectedCategory,
     isLoading,
     setIsLoading,
-   setSearchFound,
+    setSearchFound,
   } = UseAppContext()
   const [isFullWidthSearchOpen, setIsFullWidthSearchOpen] = useState(false)
+  const navigate = useNavigate()
   const inputSearchRef = useRef('')
 
   useEffect(() => {
@@ -36,20 +38,18 @@ const Header = () => {
     e.preventDefault()
     setIsLoading(true)
     setSelectedCategory('all')
-    window.history.replaceState(
-      { additionalInformation: 'updated search' },
-      'Search Videos',
-      `http://localhost:5173/search/?query=${inputSearchRef.current.value
-        ?.split(' ')
-        .join('&')}`
-    )
+    setVideosArr([])
+    navigate(`/search/${inputSearchRef.current.value?.split(' ').join('&')}`)
     fetchFromAPI(
       `search/?query=${inputSearchRef.current.value?.split(' ').join('%')}`
     )
       .then((data) => {
         setVideosArr(data?.videos)
-        if(data?.detail){setSearchFound(false)}
-        else{ setSearchFound(true)}
+        if (data?.detail) {
+          setSearchFound(false)
+        } else {
+          setSearchFound(true)
+        }
       })
       .then(() => setIsLoading(false))
   }
@@ -79,9 +79,8 @@ const Header = () => {
             />
           </Btn>
           <Btn
-            to="/"
             name="youtubeIcon"
-            btntype={'iconWithLink'}
+            btntype={'iconWithoutLink'}
             className="text-lg font-semibold text-white max-sm:text-base">
             <AiFillYoutube
               className=" max-sm:scale-[0.92]"

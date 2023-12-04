@@ -23,7 +23,7 @@ const {
 
 const menus_arr = [
   [
-    { text: 'Home', icon: <AiFillHome size={26} fill="#fff" />, to: '/', searchValue: 'interests' },
+    { text: 'Home', icon: <AiFillHome size={26} fill="#fff" />, to: '/', searchValue: 'home' },
     {
       text: 'Shorts',
       icon: <AiOutlineYoutube size={26} fill="#fff" />,

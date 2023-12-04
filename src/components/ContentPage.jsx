@@ -18,7 +18,7 @@ const ContentPage = () => {
   } = UseAppContext()
   useEffect(() => {
     setIsLoading(true)
-    setSearchQuery('  ')
+    setSearchQuery(' ')
     fetchFromAPI(`search/?query=${selectedContent}`)
       .then((data) => {
         setVideosArr(data?.videos)

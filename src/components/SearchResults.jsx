@@ -1,3 +1,4 @@
+
 import { UseAppContext } from '../context/AppContext'
 import LongvideoCard from './utils/LongVideoCard'
 
@@ -5,12 +6,12 @@ const SearchResults = () => {
   const { videosArr, setSelectedVideoId , setSearchQuery, searchFound, } = UseAppContext()
   return (
     <div className=" lg:mx-auto lg:w-[80%]">
-      <div className=" order-2 grid grid-flow-row gap-4">
       {!searchFound && (
           <div className=" text-center text-lg text-white mt-10">
             Search Query Not Found
           </div>
         )}
+      <div className=" order-2 grid grid-flow-row gap-4">
         {videosArr?.map((obj, i) => {
           return (
             <LongvideoCard
